@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SCAD Detection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .wrapper {
+            width: 100%;
+            max-width: 700px;
+            background: white;
+            border-radius: 16px;
+            padding: 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+        .title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        input[type="file"] {
+            font-size: 16px;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: block;
+            margin: 0 auto;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            background-color: #fafafa;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        input[type="file"]:hover {
+            border-color: #4e54c8;
+        }
+        .custom-button {
+            background-color: #4e54c8;
+            background-image: linear-gradient(315deg, #4e54c8 0%, #8f94fb 74%);
+            color: #fff;
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, transform 0.2s;
+        }
+        .custom-button:hover {
+            background-image: linear-gradient(315deg, #3b3fbc 0%, #7d83f6 74%);
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 40px;
+        }
+        .result h3 {
+            color: #27ae60;
+            font-size: 22px;
+        }
+        .result img {
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 13px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="title">SCAD Detection from Angiogram</div>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <br>
+            <button type="submit" class="custom-button">Run SCAD Analysis</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h3>Prediction: {{ prediction }}</h3>
+            <img src="{{ img_path }}" alt="Uploaded Angiogram">
+        </div>
+        {% endif %}
+
+        <footer>
+            &copy; 2025 SCAD AI Tool | Developed for Research Purposes
+        </footer>
+    </div>
+</body>
+</html>
